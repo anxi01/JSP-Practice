@@ -22,6 +22,8 @@ public class LoginServlet extends HttpServlet {
     PrintWriter out = resp.getWriter();
     out.println("<html><head></head><body>");
     out.println("Login Serv " + "<br>");
+    out.println("id : " + req.getParameter("id") + "<br>");
+    out.println("pw : " + req.getParameter("pw") + "<br>");
     out.println("</body></html>");
   }
 
