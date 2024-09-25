@@ -13,16 +13,19 @@ public class testSrv extends HttpServlet {
 
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    // 한글을 사용할 경우 UTF-8로 지정한다. (출력 형태 변경)
     resp.setCharacterEncoding("UTF-8");
-    resp.setContentType("text/html; charset=utf-8");
-
     PrintWriter out = resp.getWriter();
-    out.println("<html><head></head><body>");
-    for (int i = 0; i < 5; i++) {
-      out.println("Hello" + i + "안녕" + "<br>");
-    }
-    out.println("</body></html>");
+
+    // 1. HTML 설정 없이 HTML 태그를 붙이는 경우
+    out.print("1. HTML 설정 X" + "<br>");
+
+    // 2. HTML 태그를 전부 붙이는 경우
+    out.print("<html><title></title><body>");
+    out.print("2. HTML 태그 전부 붙이는 경우" + "<br>");
+    out.print("</body></html>");
+
+    // 3, contentType만 지정할 경우
+    resp.setContentType("text/html");
+    out.print("3. contentType만 지정할 경우" + "<br>");
   }
 }
