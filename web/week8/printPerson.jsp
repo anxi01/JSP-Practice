@@ -11,8 +11,8 @@
     <title>getPerson</title>
 </head>
 <body>
-    <jsp:useBean id="person" class="com.test.week8.Person" scope="request"/>
-    <jsp:setProperty name="person" property="*" />
-    <jsp:forward page="printPerson.jsp" />
+    <jsp:useBean id="person" class="com.test.week8.Person" scope="request" />
+    <p> 이름 : <jsp:getProperty name="person" property="name"/></p>
+    <p> 성인 여부 : <jsp:getProperty name="person" property="age"/></p>
 </body>
 </html>
