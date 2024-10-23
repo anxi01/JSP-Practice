@@ -12,9 +12,9 @@
 </head>
 <body>
     <jsp:useBean id="person" class="com.test.week8.Person" />
-    <jsp:setProperty name="person" property="id" value="2022" />
-    <jsp:setProperty name="person" property="name" value="한성민" />
-    <p> 이름 : <%=person.getName()%></p>
-    <p> ID : <%=person.getId()%></p>
+    <jsp:setProperty name="person" property="id" />
+    <jsp:setProperty name="person" property="name" />
+    <p> 이름 : <jsp:getProperty name="person" property="name"/></p>
+    <p> 아이디 : <jsp:getProperty name="person" property="id"/></p>
 </body>
 </html>
