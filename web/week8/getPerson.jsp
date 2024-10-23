@@ -12,10 +12,8 @@
 </head>
 <body>
     <jsp:useBean id="person" class="com.test.week8.Person" />
-    <%
-        person.setName("한성민");
-        person.setId("2022");
-    %>
+    <jsp:setProperty name="person" property="id" value="2022" />
+    <jsp:setProperty name="person" property="name" value="한성민" />
     <p> 이름 : <%=person.getName()%></p>
     <p> ID : <%=person.getId()%></p>
 </body>
