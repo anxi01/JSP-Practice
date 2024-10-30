@@ -23,11 +23,7 @@ public class Person {
     }
 
     public String getAge() {
-        int age = Integer.parseInt(this.age);
-        if (age >= 20) {
-            return "성인입니다.";
-        }
-        return "성인이 아닙니다.";
+        return age;
     }
 
     public void setAge(String age) {
