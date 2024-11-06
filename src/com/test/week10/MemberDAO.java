@@ -44,4 +44,27 @@ public class MemberDAO {
         }
         return members;
     }
+
+    public int insert(MemberDTO member) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            preparedStatement = connection.prepareStatement("insert into member(name, email) values(?,?)");
+            preparedStatement.setString(1, member.getName());
+            preparedStatement.setString(2, member.getEmail());
+            return preparedStatement.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
 }

@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet("/insertMember")
@@ -16,21 +14,20 @@ public class InsertMember extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        PrintWriter out = resp.getWriter();
+
+        MemberDAO memberDAO = new MemberDAO();
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
         try {
-            req.setCharacterEncoding("utf-8");
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/practice", "root", "");
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into member (name, email)" +
-                    " values (?,?)");
-            preparedStatement.setString(1, req.getParameter("name"));
-            preparedStatement.setString(2, req.getParameter("email"));
-            int result = preparedStatement.executeUpdate();
-            if (result == 1) {
-                System.out.println("success");
+            int cnt = memberDAO.insert(new MemberDTO(null, name, email));
+            if (cnt == 1) {
+                out.print("Save Successful");
+            } else {
+                out.print("Save Failed");
             }
-            preparedStatement.close();
-            connection.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
